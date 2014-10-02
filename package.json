@@ -10,7 +10,7 @@
     "express": "~4.9.x",
     "mongodb": "^1.4.17"
   },
-  // If you choose not to set this value, the default stable version of node will always be used when you deploy
+
   "engines": {
     "node": "0.10.x"
   },
