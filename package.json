@@ -1,26 +1,25 @@
 {
-  "name": "node-js-getting-started",
+  "name": "Travalt",
   "version": "0.1.2",
-  "description": "A sample Node.js app using Express 4",
+  "description": "Backend for PKProject iOS app",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
-    "express": "~4.9.x",
-    "cool-ascii-faces": "~1.3.x"  
+    "express": "~4.9.x"
   },
   "engines": {
     "node": "0.10.x"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
+    "url": "https://github.com/extrajordanary/PKProjectServer"
   },
   "keywords": [
     "node",
     "heroku",
     "express"
   ],
-  "license": "MIT"
+  "license": ""
 }
