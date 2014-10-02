@@ -2,6 +2,7 @@ var express = require('express')
 	, http = require('http')
 	, mongo = require('mongodb')
 	, path = require('path')
+	, CollectionDriver - require('./collectionDriver').CollectionDriver
 
 var app = express()
 app.set('port', (process.env.PORT || 5000))
