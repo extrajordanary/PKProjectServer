@@ -5,6 +5,8 @@ var express = require('express')
 
 var app = express()
 app.set('port', (process.env.PORT || 5000))
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'jade')
 app.use(express.static(path.join(__dirname, 'public')))
 
 var mongoUri = process.env.MONGOLAB_URI ||
@@ -21,7 +23,7 @@ mongo.Db.connect(mongoUri, function (err, db) {
 app.use(express.static(__dirname + '/public'))
 
 app.get('/', function(request, response) {
-  response.send('<html><body><h1>Hello World</h1></body></html>')
+  response.send('<html><body><h1>Hello Nikola</h1></body></html>')
 })
 
 app.use(function (request, response) {

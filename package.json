@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "express": "~4.9.x",
-    "mongodb": "^1.4.17"
+    "mongodb": "^1.4.17",
+    "jade": "1.1.5"
   },
 
   "engines": {
