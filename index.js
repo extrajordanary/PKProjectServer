@@ -1,6 +1,7 @@
 var express = require('express'),
 	mongoskin = require('mongoskin'),
-	bodyParser = require('body-parser')
+	bodyParser = require('body-parser'),
+    path = require('path')
 
 var app = express()
 app.set('port', (process.env.PORT || 5000))
