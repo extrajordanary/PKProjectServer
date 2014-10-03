@@ -8,12 +8,13 @@ app.set('port', (process.env.PORT || 5000))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'jade')
 
-// app.use(bodyParser())
-app.use(bodyParser.urlencoded({
+app.use(bodyParser.json({
   extended: true
 }))
 
 var db = mongoskin.db('mongodb://heroku:KuH371EeJU64VIwZ6ztw45kUNquLcDfod9aKcbpxIy5S9kSfnqL8cOFZU78OENRaWcRE7y_QW4VDudJ2TjmJPQ@linus.mongohq.com:10079/app30263650', {safe:true})
+
+// var db = mongoskin.db('mongodb://@localhost:27017/test', {safe:true})
 
 app.param('collectionName', function(req, res, next, collectionName){
   req.collection = db.collection(collectionName)
@@ -27,15 +28,15 @@ app.get('/', function(req, res) {
 app.get('/collections/:collectionName', function(req, res, next) {
   req.collection.find({} ,{limit:10, sort: [['_id',-1]]}).toArray(function(e, results){
     if (e) return next(e)
-    // res.send(results)
-	  else { 
-	      if (req.accepts('html')) { 
-	          res.render('data',{objects: results, collection: req.params.collection})
-	      } else {
-	      res.set('Content-Type','application/json')
-	          res.send(results)
-	      }
-	 }
+    res.send(results)
+	 //  else { 
+	 //      if (req.accepts('html')) { 
+	 //          res.render('data',{objects: results, collection: req.params.collection})
+	 //      } else {
+	 //      res.set('Content-Type','application/json')
+	 //          res.send(results)
+	 //      }
+	 // }
   })
 })
 
@@ -67,46 +68,46 @@ app.delete('/collections/:collectionName/:id', function(req, res, next) {
   })
 })
 
-app.use(function (request, response) {
-	response.render('404', {url:request.url})
-})
+// app.use(function (request, response) {
+// 	response.render('404', {url:request.url})
+// })
 
 app.listen(app.get('port'), function() {
   console.log("PKProjectServer is running at localhost:" + app.get('port'))
 })
 
-// app.listen(3000)
+// // app.listen(3000)
 
-// var express = require('express')
-// 	, http = require('http')
-// 	, mongo = require('mongodb')
-// 	, path = require('path')
-// 	, CollectionDriver - require('./collectionDriver').CollectionDriver
+// // var express = require('express')
+// // 	, http = require('http')
+// // 	, mongo = require('mongodb')
+// // 	, path = require('path')
+// // 	, CollectionDriver - require('./collectionDriver').CollectionDriver
 
-// var app = express()
-// app.set('port', (process.env.PORT || 5000))
+// // var app = express()
+// // app.set('port', (process.env.PORT || 5000))
 
-// app.use(express.static(path.join(__dirname, 'public')))
+// // app.use(express.static(path.join(__dirname, 'public')))
 
-// var mongoUri = process.env.MONGOLAB_URI ||
-//   process.env.MONGOHQ_URL ||
-//   'mongodb://localhost/mydb';
+// // var mongoUri = process.env.MONGOLAB_URI ||
+// //   process.env.MONGOHQ_URL ||
+// //   'mongodb://localhost/mydb';
 
-// mongo.Db.connect(mongoUri, function (err, db) {
-//   // db.collection('mydocs', function(er, collection) {
-//   //   collection.insert({'mykey': 'myvalue'}, {safe: true}, function(er,rs) {
-//   //   })
-//   // })
-// })
+// // mongo.Db.connect(mongoUri, function (err, db) {
+// //   // db.collection('mydocs', function(er, collection) {
+// //   //   collection.insert({'mykey': 'myvalue'}, {safe: true}, function(er,rs) {
+// //   //   })
+// //   // })
+// // })
 
-// app.use(express.static(__dirname + '/public'))
+// // app.use(express.static(__dirname + '/public'))
 
-// app.get('/', function(request, response) {
-//   response.send('<html><body><h1>Hello Nikola</h1></body></html>')
-// })
+// // app.get('/', function(request, response) {
+// //   response.send('<html><body><h1>Hello Nikola</h1></body></html>')
+// // })
 
 
 
-// app.listen(app.get('port'), function() {
-//   console.log("PKProjectServer is running at localhost:" + app.get('port'))
-// })
+// // app.listen(app.get('port'), function() {
+// //   console.log("PKProjectServer is running at localhost:" + app.get('port'))
+// // })
