@@ -4,6 +4,8 @@ var express = require('express'),
 
 var app = express()
 app.set('port', (process.env.PORT || 5000))
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'jade')
 
 app.use(bodyParser())
 
@@ -53,6 +55,10 @@ app.delete('/collections/:collectionName/:id', function(req, res, next) {
   })
 })
 
+app.use(function (request, response) {
+	response.render('404', {url:request.url})
+})
+
 app.listen(app.get('port'), function() {
   console.log("PKProjectServer is running at localhost:" + app.get('port'))
 })
@@ -67,8 +73,7 @@ app.listen(app.get('port'), function() {
 
 // var app = express()
 // app.set('port', (process.env.PORT || 5000))
-// app.set('views', path.join(__dirname, 'views'))
-// app.set('view engine', 'jade')
+
 // app.use(express.static(path.join(__dirname, 'public')))
 
 // var mongoUri = process.env.MONGOLAB_URI ||
@@ -88,9 +93,7 @@ app.listen(app.get('port'), function() {
 //   response.send('<html><body><h1>Hello Nikola</h1></body></html>')
 // })
 
-// app.use(function (request, response) {
-// 	response.render('404', {url:request.url})
-// })
+
 
 // app.listen(app.get('port'), function() {
 //   console.log("PKProjectServer is running at localhost:" + app.get('port'))
