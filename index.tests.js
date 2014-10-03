@@ -69,14 +69,14 @@ describe('travalt server', function(){
         done()
       })
   })
-  // it('removes an object', function(done){
-  //   superagent.del(webAddress+'/'+id)
-  //     .end(function(e, res){
-  //       // console.log(res.body)
-  //       expect(e).to.eql(null)
-  //       expect(typeof res.body).to.eql('object')
-  //       expect(res.body.msg).to.eql('success')
-  //       done()
-  //     })
-  // })
+  it('removes an object', function(done){
+    superagent.del(webAddress+'/'+id)
+      .end(function(e, res){
+        // console.log(res.body)
+        expect(e).to.eql(null)
+        expect(typeof res.body).to.eql('object')
+        expect(res.body.msg).to.eql('success')
+        done()
+      })
+  })
 })
