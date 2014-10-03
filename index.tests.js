@@ -1,13 +1,14 @@
 var superagent = require('superagent')
 var expect = require('expect.js')
 var localAddress = 'http://localhost:5000/collections/test'
-var webAddress = 'http://travalt.herokuapp.com/collections/test'
+var onlineAddress = 'http://travalt.herokuapp.com/collections/test'
 
 describe('travalt server', function(){
   var id
+  var databaseAddress = onlineAddress
 
   it('posts an object', function(done){
-    superagent.post(webAddress)
+    superagent.post(databaseAddress)
       .send({ name: 'Johnny Carson'
         , email: 'john@rpjs.co'
       })
@@ -22,7 +23,7 @@ describe('travalt server', function(){
   })
 
   it('retrieves an object', function(done){
-    superagent.get(webAddress+'/'+id)
+    superagent.get(databaseAddress+'/'+id)
       .end(function(e, res){
         // console.log(res.body)
         expect(e).to.eql(null)
@@ -34,7 +35,7 @@ describe('travalt server', function(){
   })
 
   it('retrieves a collection', function(done){
-    superagent.get(webAddress)
+    superagent.get(databaseAddress)
       .end(function(e, res){
         // console.log(res.body)
         expect(e).to.eql(null)
@@ -45,7 +46,7 @@ describe('travalt server', function(){
   })
 
   it('updates an object', function(done){
-    superagent.put(webAddress+'/'+id)
+    superagent.put(databaseAddress+'/'+id)
       .send({name: 'Peter Panda'
         , email: 'peter@yahoo.com'})
       .end(function(e, res){
@@ -58,7 +59,7 @@ describe('travalt server', function(){
   })
 
   it('checks an updated object', function(done){
-    superagent.get(webAddress+'/'+id)
+    superagent.get(databaseAddress+'/'+id)
       .end(function(e, res){
         // console.log(res.body)
         expect(e).to.eql(null)
@@ -70,7 +71,7 @@ describe('travalt server', function(){
       })
   })
   it('removes an object', function(done){
-    superagent.del(webAddress+'/'+id)
+    superagent.del(databaseAddress+'/'+id)
       .end(function(e, res){
         // console.log(res.body)
         expect(e).to.eql(null)
