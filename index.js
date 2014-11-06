@@ -1,7 +1,7 @@
 var express = require('express'),
 	mongoskin = require('mongoskin'),
 	bodyParser = require('body-parser'),
-    path = require('path')
+  path = require('path')
 
 var app = express()
 app.set('port', (process.env.PORT || 5000))
@@ -24,18 +24,21 @@ app.get('/', function(req, res) {
 })
 
 app.get('/collections/:collectionName', function(req, res, next) {
-  req.collection.find({} ,{limit:50, sort: [['_id',-1]]}).toArray(function(e, results){
-    if (e) return next(e)
-    res.send(results)
-	 //  else { 
-	 //      if (req.accepts('html')) { 
-	 //          res.render('data',{objects: results, collection: req.params.collection})
-	 //      } else {
-	 //      res.set('Content-Type','application/json')
-	 //          res.send(results)
-	 //      }
-	 // }
-  })
+  // new
+  var query = req.query.query;
+  if (query) {
+    query = JSON.parse(query);
+    req.collection.find(query ,{limit:50, sort: [['_id',-1]]}).toArray(function(e, results){
+      if (e) return next(e)
+      res.send(results)
+    })
+  } else {
+    // end new
+    req.collection.find({} ,{limit:50, sort: [['_id',-1]]}).toArray(function(e, results){
+      if (e) return next(e)
+      res.send(results)
+    })
+  }
 })
 
 app.post('/collections/:collectionName', function(req, res, next) {
